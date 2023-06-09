@@ -1,7 +1,8 @@
-import React, { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { ChangeEvent, useCallback, useMemo, useRef, useState } from "react";
 import './App.css';
 import { computeExpense } from "./App.utils";
 import ExpenseList from "./ExpenseList";
+import ExpenseHeader from "./ExpenseHeader";
 
 const EXPENSES_STORAGE = "EXPENSES";
 
@@ -23,12 +24,6 @@ const App = () => {
   const [expenses, setExpenses] = useState(EXPENSES);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
-
   const handleSetExpenses = useCallback((params: typeof EXPENSES | ((prev: typeof EXPENSES) => typeof EXPENSES)): void => {
     setExpenses((prevExpenses) => {
       const updatedExpenses = typeof params === "function" ? params(prevExpenses) : params;
@@ -41,23 +36,11 @@ const App = () => {
     if (window.confirm("Voulez-vous réinitialisez toutes les dépenses à zéro ?")) {
       handleSetExpenses(INITIAL_EXPENSES)
     }
-  }, []);
+  }, [handleSetExpenses]);
 
   const handleChangeExpense = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
-    setExpense(parseFloat(event.currentTarget.value));
+    setExpense(parseFloat(event.currentTarget.value) || "");
   }, []);
-
-  const computeExpenses = useMemo((): string => {
-    const diffExpense = computeExpense(expenses.emma) - computeExpense(expenses.francois);
-
-    if (diffExpense > 0) {
-      return `François doit ${(Math.abs(diffExpense) / 2).toFixed(2)}€ à Emma.`
-    } else if (diffExpense < 0) {
-      return `Emma doit ${(Math.abs(diffExpense) / 2).toFixed(2)}€ à François.`
-    } else {
-      return "Les dépenses sont équilibrées."
-    }
-  }, [expenses]);
 
   const addExpense = useCallback((name: keyof typeof EXPENSES) => {
     handleSetExpenses((prevExpenses) => {
@@ -68,24 +51,46 @@ const App = () => {
       }
       return { ...prevExpenses, [name]: addExpenseByName };
     })
-  }, [expense]);
+  }, [expense, handleSetExpenses]);
 
-  const removeExpense = (name: keyof typeof EXPENSES, index: number): void => {
+  const removeExpense = useCallback((name: keyof typeof EXPENSES, index: number): void => {
     setExpenses((prevExpenses) => {
       const deleteExpenseIndexByName = prevExpenses[name].filter((_, expenseIndex) => expenseIndex !== index);
       return { ...prevExpenses, [name]: deleteExpenseIndexByName }
     })
-  };
+  }, []);
+
+  const emmaExpenses = useMemo(() => computeExpense(expenses.emma), [expenses.emma]);
+  const francoisExpenses = useMemo(() => computeExpense(expenses.francois), [expenses.francois]);
+
+  const computeExpenses = useMemo((): string => {
+    const diffExpense = emmaExpenses - francoisExpenses;
+
+    if (diffExpense > 0) {
+      return `François doit ${(Math.abs(diffExpense) / 2).toFixed(2)}€ à Emma.`
+    } else if (diffExpense < 0) {
+      return `Emma doit ${(Math.abs(diffExpense) / 2).toFixed(2)}€ à François.`
+    } else {
+      return "Les dépenses sont équilibrées."
+    }
+  }, [emmaExpenses, francoisExpenses]);
+
 
   return (
     <div className="App">
       <header className="header">
         <span>{computeExpenses}</span>
-        <input ref={inputRef} value={expense} type="number" onChange={handleChangeExpense} />
+        <input ref={inputRef} value={expense} type="number" onChange={handleChangeExpense} autoFocus step="0.1" inputMode="decimal" />
       </header>
       <div className="App-layout">
-        <ExpenseList title="François" name="francois" removeExpense={removeExpense} addExpense={addExpense} nextExpense={expense} expenses={expenses.francois} />
-        <ExpenseList title="Emma" name="emma" removeExpense={removeExpense} addExpense={addExpense} nextExpense={expense} expenses={expenses.emma} />
+        <div className="Expense-List-container">
+          <ExpenseHeader title="François" name="francois" addExpense={addExpense} expense={expense} totalAmount={francoisExpenses} />
+          <ExpenseList name="francois" removeExpense={removeExpense} expenses={expenses.francois} />
+        </div>
+        <div className="Expense-List-container">
+          <ExpenseHeader title="Emma" name="emma" addExpense={addExpense} expense={expense} totalAmount={emmaExpenses} />
+          <ExpenseList name="emma" removeExpense={removeExpense} expenses={expenses.emma} />
+        </div>
       </div>
       <div>
         <button onClick={handleResetExpenses}>Réinitialiser toutes les dépenses</button>
