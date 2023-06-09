@@ -4,17 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-// if ('serviceWorker' in navigator) {
-//   window.addEventListener('load', () => {
-//     navigator.serviceWorker.register('/service-worker.js')
-//       .then(registration => {
-//         console.log('Le service worker a été enregistré avec succès:', registration);
-//       })
-//       .catch(error => {
-//         console.error('Échec de l\'enregistrement du service worker:', error);
-//       });
-//   });
-// }
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

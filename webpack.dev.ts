@@ -24,7 +24,8 @@ const config = merge(common, {
       webpackDevServer: true
     }),
     new GenerateSW({
-      
+      clientsClaim: true,
+      skipWaiting: true
     })
   ]
 });
