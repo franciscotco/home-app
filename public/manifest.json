@@ -1,6 +1,6 @@
 {
-  "short_name": "Home application",
-  "name": "Create React App Sample",
+  "short_name": "GDM",
+  "name": "Gestion des dépenses de la maison",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",

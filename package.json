@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "http://franciscotco.github.io/home-app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franciscotco/home-app.git"
+  },
   "scripts": {
     "start": "webpack-dev-server --config webpack.dev.ts",
     "build": "webpack --config webpack.prod.ts",
-    "serve": "yarn run build && serve -s dist -l 4000",
-    "deploy": "yarn run build && gh-pages --dist dist"
+    "serve": "serve -s dist -l 4000",
+    "deploy": "gh-pages --dist dist"
   },
   "eslintConfig": {
     "extends": [

@@ -45,7 +45,7 @@ const ExpensePage = (): ReactElement => {
   const removeExpense = useCallback((id: string): void => {
     setExpenses((prevExpenses) => {
       delete prevExpenses[id];
-      return prevExpenses;
+      return { ...prevExpenses };
     })
   }, []);
 
@@ -57,7 +57,9 @@ const ExpensePage = (): ReactElement => {
     <div className="expenses">
       <header className="expenses-header">
         <h3>{formatRefund(totalAmounts)}</h3>
-        <div className="expenses-amount">Montant: <Input ref={inputRef} value={amount} type="number" onChange={handleChangeAmount} autoFocus step="1" inputMode="decimal" /></div>
+        <div className="expenses-amount">
+          Montant: <Input ref={inputRef} value={amount} type="number" onChange={handleChangeAmount} autoFocus step="1" inputMode="decimal" />
+        </div>
       </header>
       <div className="expenses-content">
         <div className="expenses-list">
