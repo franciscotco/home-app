@@ -1,7 +1,6 @@
 import { DefinePlugin } from "webpack";
 import "webpack-dev-server";
 import { merge } from "webpack-merge";
-import { GenerateSW } from "workbox-webpack-plugin";
 
 import common from "./webpack.common";
 
@@ -22,10 +21,6 @@ const config = merge(common, {
   plugins: [
     new DefinePlugin({
       webpackDevServer: true
-    }),
-    new GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true
     })
   ]
 });

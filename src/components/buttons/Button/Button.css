@@ -1,4 +1,13 @@
 .button {
+  cursor: pointer;
+}
+
+.small {
+  height: 26px;
+  padding: 4px 8px;
+}
+
+.medium {
   height: 38px;
-  padding: 4px 6px;
+  padding: 4px 8px;
 }

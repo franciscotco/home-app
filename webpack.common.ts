@@ -1,7 +1,6 @@
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { resolve } from "path";
 import { type Configuration } from "webpack";
-import { GenerateSW } from "workbox-webpack-plugin";
 
 const config: Configuration = {
   entry: {
@@ -15,12 +14,11 @@ const config: Configuration = {
     },
     usedExports: true
   },
-  // cache: true,
   resolve: {
     alias: {
       "@src": resolve(__dirname, "src/")
     },
-    extensions: [".tsx", ".ts", ".js", ".jsx", ".json"]
+    extensions: [".tsx", ".ts", ".js", ".jsx"]
   },
   module: {
     rules: [

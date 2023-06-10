@@ -28,9 +28,8 @@ const config = merge(common, {
       webpackDevServer: false
     }),
     new GenerateSW({
-      swDest: 'service-worker.js',
       clientsClaim: true,
-      skipWaiting: true,
+      skipWaiting: true
     })
   ]
 });
