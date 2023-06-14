@@ -1,7 +1,7 @@
 import React, { ReactElement, ChangeEvent, useCallback, useMemo, useRef, useState } from "react";
 
-import Button from "@src/components/buttons/Button";
-import Input from "@src/components/controls/Input/Input";
+import Button from "../components/buttons/Button";
+import Input from "../components/controls/Input/Input";
 
 import { type Name } from "./Expenses.types";
 import { INITIAL_EXPENSES, computeAmount, filterExpensesByName, formatRefund } from "./Expenses.utils";

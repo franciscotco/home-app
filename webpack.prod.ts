@@ -2,6 +2,7 @@ import { resolve } from "path";
 import { DefinePlugin } from "webpack";
 import { merge } from "webpack-merge";
 import { GenerateSW } from "workbox-webpack-plugin";
+import { WebpackManifestPlugin } from "webpack-manifest-plugin";
 
 import common from "./webpack.common";
 
@@ -29,6 +30,29 @@ const config = merge(common, {
     new GenerateSW({
       clientsClaim: true,
       skipWaiting: true
+    }),
+    new WebpackManifestPlugin({
+      fileName: "manifest.json",
+      seed: {
+        "short_name": "Tickets",
+        "name": "Gestion des tickets de caisse",
+        "start_url": ".",
+        "display": "standalone",
+        "icons": [
+          {
+            "src": "logo192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+          },
+          {
+            "src": "logo512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+          }
+        ],
+        "theme_color": "#000000",
+        "background_color": "#ffffff"
+      }
     })
   ]
 });

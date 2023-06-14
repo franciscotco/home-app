@@ -9,8 +9,8 @@ const config = merge(common, {
   devtool: "eval",
   output: {
     chunkFilename: `./[name].js`,
-    filename: `./[name].js`,
-    publicPath: "/"
+    filename: `./[name].js`
+    // publicPath: "/"
   },
   devServer: {
     hot: true,

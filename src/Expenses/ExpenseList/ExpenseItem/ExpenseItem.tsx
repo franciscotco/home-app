@@ -1,6 +1,6 @@
 import React, { useCallback, type ReactElement } from "react";
 
-import Button from "@src/components/buttons/Button";
+import Button from "../../../components/buttons/Button";
 
 import "./ExpenseItem.css";
 

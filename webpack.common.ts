@@ -18,7 +18,7 @@ const config: Configuration = {
     alias: {
       "@src": resolve(__dirname, "src/")
     },
-    extensions: [".tsx", ".ts", ".js", ".jsx"]
+    extensions: [".tsx", ".ts", ".js", ".jsx", ".json"]
   },
   module: {
     rules: [
@@ -31,13 +31,30 @@ const config: Configuration = {
         test: /\.css$/i,
         use: ["style-loader", "css-loader"],
         exclude: /node_modules/
+      },
+      {
+        test: /logo192\.png$/,
+        use: {
+          loader: 'file-loader'
+          // options: {
+          //   name: '[name].[contenthash].[ext]', // Optional, defines the output filename pattern
+          //   outputPath: 'images/', // Optional, specifies the output directory for the images
+          //   publicPath: 'images/', // Optional, specifies the public URL path for the images
+          // },
+        },
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+        type: 'asset/resource',
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
+      chunks: ["app"],
       template: "./public/index.html",
-      chunks: ["app"]
+      favicon: "./public/favicon.ico",
+      inject: true
     })
   ]
 };

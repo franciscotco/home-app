@@ -2,7 +2,7 @@ import React, { forwardRef, type ButtonHTMLAttributes, type ReactElement, Forwar
 
 import classNames from "classnames";
 
-import { type ControlSize } from "@src/interfaces/Controls";
+import { type ControlSize } from "../../../interfaces/Controls";
 
 import "./Button.css";
 
