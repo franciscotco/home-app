@@ -1,6 +1,6 @@
 {
-  "short_name": "Tickets",
-  "name": "Gestion des tickets de caisse",
+  "short_name": "Dépenses",
+  "name": "Gestion des dépenses",
   "start_url": ".",
   "display": "standalone",
   "icons": [
@@ -17,7 +17,7 @@
   ],
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "app.js": "auto/app.19ff033802ce2d1a5a42.js",
+  "app.js": "auto/app.fa7ae6282a6b249877b5.js",
   "945.js": "auto/945.4f10d3f39cc13b1cdcdd.js",
   "workbox-0858eadd.js": "auto/workbox-0858eadd.js",
   "service-worker.js": "auto/service-worker.js",
