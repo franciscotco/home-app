@@ -1,8 +1,9 @@
 import { resolve } from "path";
+
 import { DefinePlugin } from "webpack";
+import { WebpackManifestPlugin } from "webpack-manifest-plugin";
 import { merge } from "webpack-merge";
 import { GenerateSW } from "workbox-webpack-plugin";
-import { WebpackManifestPlugin } from "webpack-manifest-plugin";
 
 import common from "./webpack.common";
 
@@ -11,50 +12,50 @@ const config = merge(common, {
   output: {
     filename: "[name].[contenthash].js",
     chunkFilename: "[name].[contenthash].js",
-    path: resolve(__dirname, "dist")
+    path: resolve(__dirname, "dist"),
   },
   optimization: {
-    minimize: true
+    minimize: true,
   },
   cache: {
     type: "filesystem",
     compression: "gzip",
     buildDependencies: {
-      config: [__filename]
-    }
+      config: [__filename],
+    },
   },
   plugins: [
     new DefinePlugin({
-      webpackDevServer: false
+      webpackDevServer: false,
     }),
     new GenerateSW({
       clientsClaim: true,
-      skipWaiting: true
+      skipWaiting: true,
     }),
     new WebpackManifestPlugin({
       fileName: "manifest.json",
       seed: {
-        "short_name": "Tickets",
-        "name": "Gestion des tickets de caisse",
-        "start_url": ".",
-        "display": "standalone",
-        "icons": [
+        short_name: "Tickets",
+        name: "Gestion des tickets de caisse",
+        start_url: ".",
+        display: "standalone",
+        icons: [
           {
-            "src": "logo192.png",
-            "sizes": "192x192",
-            "type": "image/png"
+            src: "logo192.png",
+            sizes: "192x192",
+            type: "image/png",
           },
           {
-            "src": "logo512.png",
-            "sizes": "512x512",
-            "type": "image/png"
-          }
+            src: "logo512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
         ],
-        "theme_color": "#000000",
-        "background_color": "#ffffff"
-      }
-    })
-  ]
+        theme_color: "#000000",
+        background_color: "#ffffff",
+      },
+    }),
+  ],
 });
 
 export default config;

@@ -2,33 +2,23 @@ import React from "react";
 
 import ReactDOM from "react-dom/client";
 
+import "./serviceWorker";
+
+/* eslint-disable import/order */
 import "./index.css";
 import App from "./App";
+/* eslint-enable import/order */
 
-if ("serviceWorker" in navigator && !webpackDevServer) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./service-worker.js");
-  });
+const rootNode = document.getElementById("root");
+
+if (rootNode) {
+  const root = ReactDOM.createRoot(rootNode);
+
+  root.render(
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  );
+} else {
+  throw Error("Missing the root tag in the DOM.");
 }
-
-const getNode = (): HTMLElement => {
-  const rootNode = document.getElementById("root");
-
-  if (rootNode) {
-    return rootNode;
-  } else {
-    const domNode = document.createElement("div");
-
-    domNode.id = "root";
-    document.body.appendChild(domNode);
-    return domNode;
-  }
-}
-
-const root = ReactDOM.createRoot(getNode());
-
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);

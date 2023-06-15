@@ -1,7 +1,7 @@
 .expenses {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   padding: 10px;
   background-color: #282c34;
   color: white;
@@ -10,12 +10,11 @@
   height: 100%;
 }
 
-.expenses-content {
+.expenses--content {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
   align-items: stretch;
-  gap: 14px;
+  gap: 12px;
   width: 100%;
   height: 100%;
   overflow-y: auto;
@@ -25,21 +24,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
 }
 
-.expenses-amount {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+.expenses--list-sort {
+  font-size: 12px;
 }
 
 .expenses-list {
   display: flex;
-  flex-direction: column;
-  gap: 14px;
-  height: 100%;
-  flex: 1;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.expenses--footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

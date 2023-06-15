@@ -2,7 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+
+  &:not(&:disabled) {
+    cursor: pointer;
+  }
+  &:disabled {
+    cursor: not-allowed;
+  }
 }
 
 .small {

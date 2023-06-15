@@ -1,3 +1,4 @@
+import ESLintPlugin from "eslint-webpack-plugin";
 import { DefinePlugin } from "webpack";
 import "webpack-dev-server";
 import { merge } from "webpack-merge";
@@ -9,20 +10,27 @@ const config = merge(common, {
   devtool: "eval",
   output: {
     chunkFilename: `./[name].js`,
-    filename: `./[name].js`
-    // publicPath: "/"
+    filename: `./[name].js`,
+    publicPath: "/",
   },
   devServer: {
     hot: true,
     port: 3000,
     compress: true,
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   plugins: [
     new DefinePlugin({
-      webpackDevServer: true
-    })
-  ]
+      webpackDevServer: true,
+    }),
+    new ESLintPlugin({
+      extensions: ["ts", "tsx"],
+      overrideConfigFile: `.eslintrc.json`,
+      fix: true,
+      failOnError: false,
+      emitWarning: true,
+    }),
+  ],
 });
 
 export default config;

@@ -1,4 +1,4 @@
-export type Name = "francois" | "emma";
+import { type Name } from "@src/interfaces/Name";
 
 export interface Expense<N extends Name = Name> {
   timestamp: number;

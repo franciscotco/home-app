@@ -1,1 +1,1 @@
-export type ControlSize = "small" | "medium"
+export type ControlSize = "small" | "medium";

@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { type ReactElement } from "react";
 
 import { type Expense } from "../Expenses.types";
 
@@ -11,10 +11,19 @@ export interface ExpenseListProps {
   removeExpense: (id: string) => void;
 }
 
-const ExpenseList = ({ items, removeExpense }: ExpenseListProps): ReactElement => (
+const ExpenseList = ({
+  items,
+  removeExpense,
+}: ExpenseListProps): ReactElement => (
   <ul className="expense-list">
-    {items.map(({ amount, id }) => (
-      <ExpenseItem key={id} amount={amount} id={id} removeExpense={removeExpense} />
+    {items.map(({ amount, id, name }) => (
+      <ExpenseItem
+        key={id}
+        amount={amount}
+        id={id}
+        name={name}
+        removeExpense={removeExpense}
+      />
     ))}
   </ul>
 );
