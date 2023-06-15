@@ -20,8 +20,8 @@
   "app.js": "auto/app.fa7ae6282a6b249877b5.js",
   "945.js": "auto/945.4f10d3f39cc13b1cdcdd.js",
   "workbox-0858eadd.js": "auto/workbox-0858eadd.js",
-  "service-worker.js": "auto/service-worker.js",
   "favicon.png": "auto/favicon.png",
+  "service-worker.js": "auto/service-worker.js",
   "index.html": "auto/index.html",
   "delete.png": "auto/6e22e101f0a9153de0ec.png"
 }
