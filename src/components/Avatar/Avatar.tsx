@@ -10,8 +10,8 @@ interface AvatarItem {
 }
 
 const AVATARS = {
-  francois: { code: "FR", color: "#555F38" },
-  emma: { code: "EM", color: "#272AB0" },
+  francois: { code: "FR", color: "#228B22" },
+  emma: { code: "EM", color: "#00008B" },
 } satisfies Record<Name, AvatarItem>;
 
 export interface AvatarProps {

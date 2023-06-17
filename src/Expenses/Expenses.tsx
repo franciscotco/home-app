@@ -13,7 +13,9 @@ import FormGroup from "@src/components/forms/FormGroup";
 import { type Name } from "@src/interfaces/Name";
 
 import ExpenseHeader from "./ExpenseHeader";
+import { formatAmount } from "./ExpenseHeader/ExpenseHeader.utils";
 import ExpenseList from "./ExpenseList";
+import { type ExpenseId } from "./Expenses.types";
 import {
   INITIAL_EXPENSES,
   TRADUCTION,
@@ -31,9 +33,7 @@ const ExpensePage = (): ReactElement => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleResetExpenses = useCallback((): void => {
-    if (
-      window.confirm("Voulez-vous réinitialisez toutes les dépenses à zéro ?")
-    ) {
+    if (window.confirm("Réinitialisez toutes les dépenses à zéro ?")) {
       setExpenses(INITIAL_EXPENSES);
     }
   }, [setExpenses]);
@@ -50,7 +50,7 @@ const ExpensePage = (): ReactElement => {
       if (typeof amount === "number") {
         setExpenses((prevExpenses) => {
           const timestamp = new Date().getTime();
-          const id = `${name}:${amount}:${timestamp}`;
+          const id: ExpenseId = `${name}:${amount}:${timestamp}`;
 
           setAmount("");
           if (inputRef.current) {
@@ -68,13 +68,21 @@ const ExpensePage = (): ReactElement => {
   );
 
   const removeExpense = useCallback(
-    (id: string): void => {
-      setExpenses((prevExpenses) => {
-        delete prevExpenses[id];
-        return { ...prevExpenses };
-      });
+    (id: ExpenseId): void => {
+      if (
+        window.confirm(
+          `Retirer la dépense de ${formatAmount(expenses[id].amount)} à ${
+            TRADUCTION[expenses[id].name]
+          } ?`
+        )
+      ) {
+        setExpenses((prevExpenses) => {
+          delete prevExpenses[id];
+          return { ...prevExpenses };
+        });
+      }
     },
-    [setExpenses]
+    [expenses, setExpenses]
   );
 
   const totalAmounts = useMemo(() => computeAmount(expenses), [expenses]);
@@ -85,39 +93,39 @@ const ExpensePage = (): ReactElement => {
 
   return (
     <div className="expenses">
-      <header className="expenses-header">
-        <h3>{formatRefund(totalAmounts)}</h3>
-        <FormGroup label="Montant" name="amount">
-          <Input
-            ref={inputRef}
-            id="amount"
-            value={amount}
-            type="number"
-            onChange={handleChangeAmount}
-            autoFocus
-            step="1"
-            inputMode="decimal"
-          />
-        </FormGroup>
-      </header>
-      <div className="expenses--content">
-        <div className="expenses-list">
-          <ExpenseHeader
-            title={TRADUCTION.francois}
-            name="francois"
-            addExpense={addExpense}
-            amount={amount}
-            totalAmount={totalAmounts.francois}
-          />
-          <ExpenseHeader
-            title={TRADUCTION.emma}
-            name="emma"
-            addExpense={addExpense}
-            amount={amount}
-            totalAmount={totalAmounts.emma}
-          />
+      <header className="expenses-header">{formatRefund(totalAmounts)}</header>
+      <main className="expenses--content">
+        <div className="expenses--form">
+          <FormGroup label="Montant" name="amount">
+            <Input
+              ref={inputRef}
+              id="amount"
+              value={amount}
+              type="number"
+              onChange={handleChangeAmount}
+              autoFocus
+              step="1"
+              inputMode="decimal"
+            />
+          </FormGroup>
+          <div className="expenses-list">
+            <ExpenseHeader
+              title={TRADUCTION.francois}
+              name="francois"
+              addExpense={addExpense}
+              amount={amount}
+              totalAmount={totalAmounts.francois}
+            />
+            <ExpenseHeader
+              title={TRADUCTION.emma}
+              name="emma"
+              addExpense={addExpense}
+              amount={amount}
+              totalAmount={totalAmounts.emma}
+            />
+          </div>
         </div>
-        <div>
+        <div className="expenses--list">
           {sortedExpensesByTimestampDesc.length > 0 && (
             <span className="expenses--list-sort">Plus récent</span>
           )}
@@ -126,12 +134,12 @@ const ExpensePage = (): ReactElement => {
             items={sortedExpensesByTimestampDesc}
           />
         </div>
-      </div>
-      <div className="expenses--footer">
+      </main>
+      <footer className="expenses--footer">
         <Button onClick={handleResetExpenses} size="medium">
           Réinitialiser toutes les dépenses
         </Button>
-      </div>
+      </footer>
     </div>
   );
 };

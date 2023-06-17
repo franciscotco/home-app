@@ -2,21 +2,29 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #30363d;
+  border-radius: 6px;
+  border: 1px solid #f0f6fc1a;
+  color: #E6EDF3;
+  line-height: 140%;
+  font-weight: 500;
+  font-size: 14px;
 
   &:not(&:disabled) {
     cursor: pointer;
   }
   &:disabled {
     cursor: not-allowed;
+    opacity: .5;
   }
 }
 
 .small {
-  height: 26px;
-  padding: 4px 8px;
+  height: 28px;
+  padding: 4px 12px;
 }
 
 .medium {
-  height: 38px;
-  padding: 4px 8px;
+  height: 32px;
+  padding: 4px 12px;
 }

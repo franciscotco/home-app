@@ -1,6 +1,6 @@
 import React, { type ReactElement } from "react";
 
-import { type Expense } from "../Expenses.types";
+import { type ExpenseId, type Expense } from "../Expenses.types";
 
 import ExpenseItem from "./ExpenseItem";
 
@@ -8,7 +8,7 @@ import "./ExpenseList.css";
 
 export interface ExpenseListProps {
   items: Expense[];
-  removeExpense: (id: string) => void;
+  removeExpense: (id: ExpenseId) => void;
 }
 
 const ExpenseList = ({

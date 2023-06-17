@@ -1,16 +1,18 @@
 import React, { useCallback, type ReactElement } from "react";
 
+import { type ExpenseId } from "@src/Expenses/Expenses.types";
+import DeleteIcon from "@src/assets/icons/delete.png";
 import Avatar from "@src/components/Avatar";
-import Button from "@src/components/buttons/Button";
+import ButtonIcon from "@src/components/buttons/ButtonIcon";
 import { type Name } from "@src/interfaces/Name";
 
 import "./ExpenseItem.css";
 
 export interface ExpenseItemProps {
   amount: number;
-  id: string;
+  id: ExpenseId;
   name: Name;
-  removeExpense: (id: string) => void;
+  removeExpense: (id: ExpenseId) => void;
 }
 
 const ExpenseItem = ({
@@ -30,9 +32,12 @@ const ExpenseItem = ({
       <div className="expense-item--avatar">
         <strong>{amount}€</strong>
       </div>
-      <Button onClick={handleRemoveExpense} size="small">
-        supprimer
-      </Button>
+      <ButtonIcon
+        onClick={handleRemoveExpense}
+        size="small"
+        src={DeleteIcon}
+        alt={`Supprimer la dépense de ${name} d'un montant de ${amount}`}
+      />
     </li>
   );
 };

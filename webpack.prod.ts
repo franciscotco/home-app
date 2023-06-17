@@ -35,8 +35,8 @@ const config = merge(common, {
     new WebpackManifestPlugin({
       fileName: "manifest.json",
       seed: {
-        short_name: "Tickets",
-        name: "Gestion des tickets de caisse",
+        short_name: "Dépenses",
+        name: "Gestion des dépenses",
         start_url: ".",
         display: "standalone",
         icons: [
@@ -52,7 +52,7 @@ const config = merge(common, {
           },
         ],
         theme_color: "#000000",
-        background_color: "#ffffff",
+        background_color: "#E6EDF3",
       },
     }),
   ],

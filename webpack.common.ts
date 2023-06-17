@@ -34,13 +34,7 @@ const config: Configuration = {
         exclude: /node_modules/,
       },
       {
-        test: /logo192\.png$/,
-        use: {
-          loader: "file-loader",
-        },
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
+        test: /\.(png|svg)$/i,
         type: "asset/resource",
       },
     ],
@@ -49,7 +43,7 @@ const config: Configuration = {
     new HtmlWebpackPlugin({
       chunks: ["app"],
       template: "./public/index.html",
-      favicon: "./public/favicon.ico",
+      favicon: "./public/favicon.png",
       inject: true,
     }),
   ],

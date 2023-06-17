@@ -33,7 +33,7 @@ const ExpenseHeader = <T extends Name>({
         {title}: <strong>{totalAmount}€</strong>
       </h4>
       <Button onClick={handleAddExpense} disabled={!amount}>
-        {formatAmount(amount)}€ de {title}
+        {formatAmount(amount)} à {title}
       </Button>
     </div>
   );

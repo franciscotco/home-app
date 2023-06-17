@@ -2,4 +2,9 @@
   height: 38px;
   padding: 4px 8px;
   width: 160px;
+  border: 1px solid #f0f6fc1a;
+  background-color: transparent;
+  color: #E6EDF3;
+  border-color: #E6EDF3;
+  border-radius: 6px;
 }

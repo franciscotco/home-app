@@ -19,7 +19,7 @@ export const computeAmount = (expenses: Expenses): TotalAmounts =>
       ...acc,
       [expense.name]: acc[expense.name] + expense.amount,
     }),
-    { emma: 0, francois: 0 } as TotalAmounts
+    { emma: 0, francois: 0 } satisfies TotalAmounts
   );
 
 export const filterExpensesByName = <N extends Name>(
