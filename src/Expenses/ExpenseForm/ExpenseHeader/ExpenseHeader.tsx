@@ -1,13 +1,13 @@
 import React, { useCallback, type ReactElement } from "react";
 
 import Button from "@src/components/buttons/Button";
-import { type Name } from "@src/interfaces/Name";
+import { type ExpenseName } from "@src/interfaces/Expenses";
 
 import { formatAmount } from "./ExpenseHeader.utils";
 
 import "./ExpenseHeader.css";
 
-export interface ExpenseHeaderProps<T extends Name> {
+export interface ExpenseHeaderProps<T extends ExpenseName> {
   title: string;
   name: T;
   totalAmount: number;
@@ -15,7 +15,7 @@ export interface ExpenseHeaderProps<T extends Name> {
   amount: number | string;
 }
 
-const ExpenseHeader = <T extends Name>({
+const ExpenseHeader = <T extends ExpenseName>({
   name,
   title,
   totalAmount,

@@ -1,31 +1,29 @@
 import React, { type ReactElement } from "react";
 
-import { type ExpenseId, type Expense } from "../Expenses.types";
+import { useAppSelector } from "@src/redux/redux.hooks";
+import { selectors } from "@src/redux/redux.selectors";
 
 import ExpenseItem from "./ExpenseItem";
 
 import "./ExpenseList.css";
 
-export interface ExpenseListProps {
-  items: Expense[];
-  removeExpense: (id: ExpenseId) => void;
-}
+const ExpenseList = (): ReactElement => {
+  const sortedExpensesByTimestampDesc = useAppSelector(
+    selectors.expenses.selectExpensesByTimestamp
+  );
 
-const ExpenseList = ({
-  items,
-  removeExpense,
-}: ExpenseListProps): ReactElement => (
-  <ul className="expense-list">
-    {items.map(({ amount, id, name }) => (
-      <ExpenseItem
-        key={id}
-        amount={amount}
-        id={id}
-        name={name}
-        removeExpense={removeExpense}
-      />
-    ))}
-  </ul>
-);
+  return (
+    <div className="expenses--list">
+      {sortedExpensesByTimestampDesc.length > 0 && (
+        <span className="expenses--list-sort">Plus récent</span>
+      )}
+      <ul className="expense-list">
+        {sortedExpensesByTimestampDesc.map(({ amount, id, name }) => (
+          <ExpenseItem key={id} amount={amount} id={id} name={name} />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default ExpenseList;

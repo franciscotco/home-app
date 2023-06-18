@@ -52,7 +52,7 @@ const config = merge(common, {
           },
         ],
         theme_color: "#000000",
-        background_color: "#E6EDF3",
+        background_color: "#000000",
       },
     }),
   ],

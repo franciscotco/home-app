@@ -1,1 +1,1 @@
-export { default, type ExpenseListProps } from "./ExpenseList";
+export { default } from "./ExpenseList";

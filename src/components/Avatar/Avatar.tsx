@@ -1,6 +1,6 @@
 import React, { type ReactElement } from "react";
 
-import { type Name } from "@src/interfaces/Name";
+import { type ExpenseName } from "@src/interfaces/Expenses";
 
 import "./Avatar.css";
 
@@ -12,10 +12,10 @@ interface AvatarItem {
 const AVATARS = {
   francois: { code: "FR", color: "#228B22" },
   emma: { code: "EM", color: "#00008B" },
-} satisfies Record<Name, AvatarItem>;
+} satisfies Record<ExpenseName, AvatarItem>;
 
 export interface AvatarProps {
-  name: Name;
+  name: ExpenseName;
 }
 
 const Avatar = ({ name }: AvatarProps): ReactElement => (

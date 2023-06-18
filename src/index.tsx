@@ -20,5 +20,5 @@ if (rootNode) {
     </React.StrictMode>
   );
 } else {
-  throw Error("Missing the root tag in the DOM.");
+  throw Error("Missing the root node in the DOM.");
 }

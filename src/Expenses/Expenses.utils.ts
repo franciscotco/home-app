@@ -1,39 +1,4 @@
-import { type Name } from "@src/interfaces/Name";
-
-import {
-  type Expenses,
-  type Expense,
-  type TotalAmounts,
-} from "./Expenses.types";
-
-export const TRADUCTION = {
-  emma: "Emma",
-  francois: "François",
-};
-
-export const INITIAL_EXPENSES: Expenses = {};
-
-export const computeAmount = (expenses: Expenses): TotalAmounts =>
-  Object.values(expenses).reduce(
-    (acc, expense) => ({
-      ...acc,
-      [expense.name]: acc[expense.name] + expense.amount,
-    }),
-    { emma: 0, francois: 0 } satisfies TotalAmounts
-  );
-
-export const filterExpensesByName = <N extends Name>(
-  expenses: Expenses,
-  name: N
-): Expense<N>[] =>
-  Object.values(expenses).filter(
-    (expense): expense is Expense<N> => expense.name === name
-  );
-
-export const sortExpensesByTimestampDesc = (expenses: Expense[]): Expense[] =>
-  expenses.sort(
-    (expenseA, expenseB) => expenseB.timestamp - expenseA.timestamp
-  );
+import { type TotalAmounts } from "@src/interfaces/Expenses";
 
 export const formatRefund = ({
   emma: emmaAmount,

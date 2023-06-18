@@ -1,30 +1,33 @@
 import React, { useCallback, type ReactElement } from "react";
 
-import { type ExpenseId } from "@src/Expenses/Expenses.types";
+import { formatAmount } from "@src/Expenses/ExpenseForm/ExpenseHeader/ExpenseHeader.utils";
 import DeleteIcon from "@src/assets/icons/delete.png";
 import Avatar from "@src/components/Avatar";
 import ButtonIcon from "@src/components/buttons/ButtonIcon";
-import { type Name } from "@src/interfaces/Name";
+import { type ExpenseId, type ExpenseName } from "@src/interfaces/Expenses";
+import { deleteExpense } from "@src/redux/expenses";
+import { useAppDispatch } from "@src/redux/redux.hooks";
 
 import "./ExpenseItem.css";
 
 export interface ExpenseItemProps {
   amount: number;
   id: ExpenseId;
-  name: Name;
-  removeExpense: (id: ExpenseId) => void;
+  name: ExpenseName;
 }
 
-const ExpenseItem = ({
-  amount,
-  id,
-  name,
-  removeExpense,
-}: ExpenseItemProps): ReactElement => {
-  const handleRemoveExpense = useCallback(
-    (): void => removeExpense(id),
-    [id, removeExpense]
-  );
+const ExpenseItem = ({ amount, id, name }: ExpenseItemProps): ReactElement => {
+  const dispatch = useAppDispatch();
+
+  const handleRemoveExpense = useCallback((): void => {
+    if (
+      window.confirm(
+        `Retirer la dépense de ${formatAmount(amount)} à ${name} ?`
+      )
+    ) {
+      dispatch(deleteExpense(id));
+    }
+  }, [amount, dispatch, id, name]);
 
   return (
     <li key={id} className="expense-item">
