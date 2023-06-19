@@ -28,7 +28,7 @@ const Expenses = (): ReactElement => {
         <ExpensesList />
       </Main>
       <Footer>
-        <Button onClick={handleResetExpenses} size="medium">
+        <Button onClick={handleResetExpenses} size="medium" variant="primary">
           Réinitialiser toutes les dépenses
         </Button>
       </Footer>
