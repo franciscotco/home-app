@@ -12,9 +12,4 @@ export interface Expense<N extends ExpenseName = ExpenseName> {
   id: ExpenseId<N>;
 }
 
-export type Expenses<Name extends ExpenseName> = Record<
-  ExpenseId<Name>,
-  Expense<Name>
->;
-
 export type TotalAmounts = Record<ExpenseName, number>;

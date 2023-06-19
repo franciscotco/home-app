@@ -5,13 +5,12 @@ import { resetExpenses } from "@src/redux/expenses";
 import { useAppDispatch, useAppSelector } from "@src/redux/redux.hooks";
 import { selectors } from "@src/redux/redux.selectors";
 
-import ExpenseForm from "./ExpenseForm/ExpenseForm";
-import ExpenseList from "./ExpenseList";
+import { Root, Header, Footer, Main } from "./Expenses.styles";
 import { formatRefund } from "./Expenses.utils";
+import ExpenseForm from "./ExpensesForm/ExpensesForm";
+import ExpensesList from "./ExpensesList";
 
-import "./Expenses.css";
-
-const ExpensePage = (): ReactElement => {
+const Expenses = (): ReactElement => {
   const dispatch = useAppDispatch();
   const totalAmounts = useAppSelector(selectors.expenses.selectTotalAmounts);
 
@@ -22,19 +21,19 @@ const ExpensePage = (): ReactElement => {
   }, [dispatch]);
 
   return (
-    <div className="expenses">
-      <header className="expenses-header">{formatRefund(totalAmounts)}</header>
-      <main className="expenses--content">
+    <Root>
+      <Header>{formatRefund(totalAmounts)}</Header>
+      <Main>
         <ExpenseForm />
-        <ExpenseList />
-      </main>
-      <footer className="expenses--footer">
+        <ExpensesList />
+      </Main>
+      <Footer>
         <Button onClick={handleResetExpenses} size="medium">
           Réinitialiser toutes les dépenses
         </Button>
-      </footer>
-    </div>
+      </Footer>
+    </Root>
   );
 };
 
-export default ExpensePage;
+export default Expenses;

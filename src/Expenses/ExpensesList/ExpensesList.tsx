@@ -3,27 +3,26 @@ import React, { type ReactElement } from "react";
 import { useAppSelector } from "@src/redux/redux.hooks";
 import { selectors } from "@src/redux/redux.selectors";
 
-import ExpenseItem from "./ExpenseItem";
+import ExpensesItem from "./ExpensesItem";
+import { Root, SortOrder, List } from "./ExpensesList.styles";
 
-import "./ExpenseList.css";
-
-const ExpenseList = (): ReactElement => {
+const ExpensesList = (): ReactElement => {
   const sortedExpensesByTimestampDesc = useAppSelector(
     selectors.expenses.selectExpensesByTimestamp
   );
 
   return (
-    <div className="expenses--list">
+    <Root>
       {sortedExpensesByTimestampDesc.length > 0 && (
-        <span className="expenses--list-sort">Plus récent</span>
+        <SortOrder>Plus récent</SortOrder>
       )}
-      <ul className="expense-list">
+      <List>
         {sortedExpensesByTimestampDesc.map(({ amount, id, name }) => (
-          <ExpenseItem key={id} amount={amount} id={id} name={name} />
+          <ExpensesItem key={id} amount={amount} id={id} name={name} />
         ))}
-      </ul>
-    </div>
+      </List>
+    </Root>
   );
 };
 
-export default ExpenseList;
+export default ExpensesList;

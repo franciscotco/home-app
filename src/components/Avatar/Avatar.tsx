@@ -2,26 +2,17 @@ import React, { type ReactElement } from "react";
 
 import { type ExpenseName } from "@src/interfaces/Expenses";
 
-import "./Avatar.css";
+import { Root } from "./Avatar.styles";
 
-interface AvatarItem {
-  code: Uppercase<string>;
-  color: `#${string}`;
-}
-
-const AVATARS = {
-  francois: { code: "FR", color: "#228B22" },
-  emma: { code: "EM", color: "#00008B" },
-} satisfies Record<ExpenseName, AvatarItem>;
+const formatName = (name: ExpenseName): string =>
+  name.substring(0, 2).toUpperCase();
 
 export interface AvatarProps {
   name: ExpenseName;
 }
 
 const Avatar = ({ name }: AvatarProps): ReactElement => (
-  <div className="avatar" style={{ color: AVATARS[name].color }}>
-    {AVATARS[name].code}
-  </div>
+  <Root name={name}>{formatName(name)}</Root>
 );
 
 export default Avatar;

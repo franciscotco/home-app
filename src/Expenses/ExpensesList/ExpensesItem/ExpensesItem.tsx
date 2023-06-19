@@ -1,6 +1,6 @@
 import React, { useCallback, type ReactElement } from "react";
 
-import { formatAmount } from "@src/Expenses/ExpenseForm/ExpenseHeader/ExpenseHeader.utils";
+import { formatAmount } from "@src/Expenses/ExpensesForm/ExpensesButton/ExpensesButton.utils";
 import DeleteIcon from "@src/assets/icons/delete.png";
 import Avatar from "@src/components/Avatar";
 import ButtonIcon from "@src/components/buttons/ButtonIcon";
@@ -8,15 +8,19 @@ import { type ExpenseId, type ExpenseName } from "@src/interfaces/Expenses";
 import { deleteExpense } from "@src/redux/expenses";
 import { useAppDispatch } from "@src/redux/redux.hooks";
 
-import "./ExpenseItem.css";
+import { Amount, Item } from "./ExpensesItem.styles";
 
-export interface ExpenseItemProps {
+export interface ExpensesItemProps {
   amount: number;
   id: ExpenseId;
   name: ExpenseName;
 }
 
-const ExpenseItem = ({ amount, id, name }: ExpenseItemProps): ReactElement => {
+const ExpensesItem = ({
+  amount,
+  id,
+  name,
+}: ExpensesItemProps): ReactElement => {
   const dispatch = useAppDispatch();
 
   const handleRemoveExpense = useCallback((): void => {
@@ -30,19 +34,17 @@ const ExpenseItem = ({ amount, id, name }: ExpenseItemProps): ReactElement => {
   }, [amount, dispatch, id, name]);
 
   return (
-    <li key={id} className="expense-item">
+    <Item key={id}>
       <Avatar name={name} />
-      <div className="expense-item--avatar">
-        <strong>{amount}€</strong>
-      </div>
+      <Amount>{amount}€</Amount>
       <ButtonIcon
         onClick={handleRemoveExpense}
-        size="small"
         src={DeleteIcon}
         alt={`Supprimer la dépense de ${name} d'un montant de ${amount}`}
+        size="medium"
       />
-    </li>
+    </Item>
   );
 };
 
-export default ExpenseItem;
+export default ExpensesItem;

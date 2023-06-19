@@ -21,7 +21,6 @@ const computeTotalAmounts = (expenses: ExpensesState): TotalAmounts =>
 
 export interface ExpensesSelectors {
   selectExpensesByTimestamp: AppSelector<Expense[]>;
-  selectExpenses: AppSelector<ExpensesState>;
   selectTotalAmounts: AppSelector<TotalAmounts>;
 }
 
@@ -32,6 +31,5 @@ export const expensesSelectors = (
     slicer,
     sortExpensesByTimestampDesc
   ),
-  selectExpenses: createSelector(slicer, (state) => state),
   selectTotalAmounts: createSelector(slicer, computeTotalAmounts),
 });

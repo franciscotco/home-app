@@ -4,14 +4,14 @@ import storage from "redux-persist/lib/storage";
 
 import expenses, { EXPENSES_SLICE_NAME } from "./expenses";
 
-const persistConfig = {
+const PERSIST_CONFIG = {
   key: "redux",
   storage,
   whitelist: [EXPENSES_SLICE_NAME],
 };
 
 const persistedReducer = persistReducer(
-  persistConfig,
+  PERSIST_CONFIG,
   combineReducers({
     expenses,
   })

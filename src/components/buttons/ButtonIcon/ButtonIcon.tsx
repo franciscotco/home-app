@@ -1,10 +1,8 @@
 import React, { forwardRef, type ReactElement, type ForwardedRef } from "react";
 
-import classNames from "classnames";
-
 import Button, { type ButtonProps } from "@src/components/buttons/Button";
 
-import "./ButtonIcon.css";
+import { Img } from "./ButtonIcon.styles";
 
 export interface ButtonIconProps extends ButtonProps {
   src: string;
@@ -12,15 +10,11 @@ export interface ButtonIconProps extends ButtonProps {
 }
 
 const ButtonIcon = (
-  { className, src, alt, ...buttonProps }: ButtonIconProps,
+  { src, alt, ...buttonProps }: ButtonIconProps,
   ref: ForwardedRef<HTMLButtonElement>
 ): ReactElement => (
-  <Button
-    {...buttonProps}
-    ref={ref}
-    className={classNames("button-icon", className)}
-  >
-    <img height="100%" src={src} alt={alt} />
+  <Button {...buttonProps} ref={ref}>
+    <Img height="100%" src={src} alt={alt} />
   </Button>
 );
 

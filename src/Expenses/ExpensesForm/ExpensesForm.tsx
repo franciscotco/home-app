@@ -13,9 +13,8 @@ import { createExpense } from "@src/redux/expenses";
 import { useAppDispatch, useAppSelector } from "@src/redux/redux.hooks";
 import { selectors } from "@src/redux/redux.selectors";
 
-import ExpenseHeader from "./ExpenseHeader";
-
-import "./ExpenseForm.css";
+import ExpensesButton from "./ExpensesButton";
+import { Form, FormFooter } from "./ExpensesForm.styles";
 
 const ExpenseForm = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -44,7 +43,7 @@ const ExpenseForm = (): ReactElement => {
   );
 
   return (
-    <div className="expenses--form">
+    <Form>
       <FormGroup label="Montant" name="amount">
         <Input
           ref={inputRef}
@@ -57,23 +56,43 @@ const ExpenseForm = (): ReactElement => {
           inputMode="decimal"
         />
       </FormGroup>
-      <div className="expenses-list">
-        <ExpenseHeader
-          title="François"
+      <FormFooter>
+        <FormGroup
+          label={
+            <>
+              François: <strong>{totalAmounts.francois}€</strong>
+            </>
+          }
           name="francois"
-          addExpense={addExpense}
-          amount={amount}
-          totalAmount={totalAmounts.francois}
-        />
-        <ExpenseHeader
-          title="Emma"
+          width="full"
+          align="center"
+        >
+          <ExpensesButton
+            title="François"
+            name="francois"
+            addExpense={addExpense}
+            amount={amount}
+          />
+        </FormGroup>
+        <FormGroup
+          label={
+            <>
+              Emma: <strong>{totalAmounts.emma}€</strong>
+            </>
+          }
           name="emma"
-          addExpense={addExpense}
-          amount={amount}
-          totalAmount={totalAmounts.emma}
-        />
-      </div>
-    </div>
+          width="full"
+          align="center"
+        >
+          <ExpensesButton
+            title="Emma"
+            name="emma"
+            addExpense={addExpense}
+            amount={amount}
+          />
+        </FormGroup>
+      </FormFooter>
+    </Form>
   );
 };
 

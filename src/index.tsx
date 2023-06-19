@@ -2,12 +2,8 @@ import React from "react";
 
 import ReactDOM from "react-dom/client";
 
-import "./serviceWorker";
-
-/* eslint-disable import/order */
-import "./index.css";
 import App from "./App";
-/* eslint-enable import/order */
+import "./serviceWorker";
 
 const rootNode = document.getElementById("root");
 

@@ -1,23 +1,31 @@
-import React, { type PropsWithChildren, type ReactElement } from "react";
+import React, {
+  type ReactNode,
+  type PropsWithChildren,
+  type ReactElement,
+} from "react";
 
-import "./FormGroup.css";
+import { Label, Root } from "./FormGroup.styles";
 
 export interface FormGroupProps {
-  label: string;
+  align?: "center";
+  label: ReactNode;
   name: string;
+  width?: "full";
 }
 
 const FormGroup = ({
+  align,
   children,
   label,
   name,
+  width,
 }: PropsWithChildren<FormGroupProps>): ReactElement => (
-  <div className="form-group">
-    <label htmlFor={name} className="form-group--label">
+  <Root width={width}>
+    <Label align={align} htmlFor={name}>
       {label}
-    </label>
-    <div>{children}</div>
-  </div>
+    </Label>
+    {children}
+  </Root>
 );
 
 export default FormGroup;

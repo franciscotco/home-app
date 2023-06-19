@@ -5,28 +5,28 @@ import React, {
   type ForwardedRef,
 } from "react";
 
-import classNames from "classnames";
+import { type ControlSize } from "@src/interfaces/Controls";
+import { type Variant } from "@src/interfaces/Variants";
 
-import { type ControlSize } from "../../../interfaces/Controls";
-
-import "./Button.css";
+import { ButtonRoot } from "./Button.styles";
 
 export interface ButtonProps
-  extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "size"> {
+  extends Omit<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    "size" | "width" | "className"
+  > {
   size?: ControlSize;
+  width?: "full";
+  variant?: Variant;
 }
 
 const Button = (
-  { children, className, size = "medium", ...buttonProps }: ButtonProps,
+  { children, size, width, ...buttonProps }: ButtonProps,
   ref: ForwardedRef<HTMLButtonElement>
 ): ReactElement => (
-  <button
-    {...buttonProps}
-    ref={ref}
-    className={classNames(className, "button", { [size]: Boolean(size) })}
-  >
+  <ButtonRoot {...buttonProps} ref={ref} size={size} width={width}>
     {children}
-  </button>
+  </ButtonRoot>
 );
 
 export default forwardRef(Button);

@@ -5,22 +5,13 @@ import React, {
   forwardRef,
 } from "react";
 
-import classNames from "classnames";
-
-import "./input.css";
+import { InputRoot } from "./Input.styles";
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement>;
 
 const Input = (
-  { className, disabled, ...props }: InputProps,
+  { disabled, ...props }: InputProps,
   ref: ForwardedRef<HTMLInputElement>
-): ReactElement => (
-  <input
-    {...props}
-    ref={ref}
-    disabled={disabled}
-    className={classNames(className, "input")}
-  />
-);
+): ReactElement => <InputRoot {...props} ref={ref} disabled={disabled} />;
 
 export default forwardRef(Input);
